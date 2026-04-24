@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ TechFest 2026 - Ultimate Neon Edition ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Cosmic Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #0a0a0a, #1a0033, #0a0a0a, #001122);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120,219,255,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00f5ff;
+            border-radius: 50%;
+            animation: floatParticle 25s linear infinite;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        /* Navigation - Glass Morphism */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(120, 119, 198, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { filter: drop-shadow(0 0 20px #00f5ff); }
+            to { filter: drop-shadow(0 0 40px #ff00ff); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #00f5ff;
+            background: rgba(0, 245, 255, 0.15);
+            box-shadow: 0 0 25px rgba(0, 245, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 90px;
+            min-height: calc(100vh - 90px);
+            position: relative;
+            padding: 2rem;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+            animation: slideInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideInUp {
+            0% { opacity: 0; transform: translateY(60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 3rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border-radius: 40px;
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(0, 245, 255, 0.15), transparent 30%);
+            animation: rotate 25s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 50px rgba(0, 245, 255, 0.7);
+            animation: heroGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            from { filter: drop-shadow(0 0 30px #00f5ff); }
+            to { filter: drop-shadow(0 0 50px #ff00ff); }
+        }
+
+        /* Event Grid - 3D Cards */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(0, 245, 255, 0.4);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            text-align: center;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff88, #ffaa00);
+            background-size: 300% 100%;
+            animation: shimmer 4s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .event-card:hover {
+            transform: translateY(-25px) rotateX(15deg) rotateY(15deg) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0, 245, 255, 0.5);
+            border-color: rgba(0, 245, 255, 0.8);
+        }
+
+        .event-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        /* PERFECTLY VISIBLE FORMS */
+        form {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: rgba(20, 20, 50, 0.95);
+            backdrop-filter: blur(30px);
+            padding: 4rem;
+            border-radius: 35px;
+            border: 2px solid rgba(0, 245, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff88, #ffaa00);
+            background-size: 400% 100%;
+            animation: shimmer 2.5s ease infinite;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            color: #00f5ff !important;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(0, 245, 255, 0.7);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            border: 2px solid rgba(0, 245, 255, 0.4);
+            border-radius: 20px;
+            font-size: 1.1rem;
+            background: rgba(10, 10, 35, 0.98) !important;
+            backdrop-filter: blur(20px);
+            color: #00ff88 !important;
+            transition: all 0.4s ease;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            -webkit-text-fill-color: #00ff88 !important;
+            text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+        }
+
+        /* PERFECT DROPDOWN VISIBILITY */
+        select option {
+            background: rgba(10, 10, 25, 1) !important;
+            color: #00ff88 !important;
+            font-weight: 700 !important;
+            padding: 15px !important;
+            font-size: 1.1rem !important;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3) !important;
+        }
+
+        select option:hover {
+            background: rgba(0, 255, 136, 0.2) !important;
+        }
+
+        select option:checked {
+            background: linear-gradient(45deg, #00ff88, #00f5ff) !important;
+            color: #000 !important;
+            font-weight: 800 !important;
+        }
+
+        input::placeholder {
+            color: rgba(0, 255, 136, 0.7) !important;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00f5ff;
+            background: rgba(0, 255, 136, 0.2) !important;
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.8);
+            transform: scale(1.03);
+            color: #00ff88 !important;
+        }
+
+        .error {
+            color: #ff477e !important;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: none;
+            background: rgba(255, 71, 126, 0.2);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border-left: 5px solid #ff477e;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(255, 71, 126, 0.3);
+        }
+
+        /* Ultimate Neon Buttons */
+        .btn {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88, #ffaa00);
+            background-size: 400% 400%;
+            color: #000 !important;
+            padding: 1.5rem 3.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.5s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', monospace;
+            position: relative;
+            overflow: hidden;
+            animation: btnShimmer 3s ease infinite;
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.4);
+        }
+
+        @keyframes btnShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 30px 60px rgba(0, 245, 255, 0.7);
+            background-position: 100% 50%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #ff477e, #ffaa00) !important;
+            width: auto !important;
+            margin: 0.7rem !important;
+            font-size: 1rem !important;
+        }
+
+        /* Success Message */
+        .success {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(0, 245, 255, 0.25));
+            backdrop-filter: blur(35px);
+            border: 2px solid rgba(0, 255, 136, 0.7);
+            border-radius: 35px;
+            padding: 4rem;
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 700px;
+            box-shadow: 0 35px 70px rgba(0, 255, 136, 0.4);
+            animation: successPulse 2s ease infinite;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { box-shadow: 0 35px 70px rgba(0, 255, 136, 0.4); }
+            50% { box-shadow: 0 35px 70px rgba(0, 255, 136, 0.7); transform: scale(1.02); }
+        }
+
+        /* Admin Dashboard */
+        .admin-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border-radius: 35px;
+            padding: 4rem;
+            border: 2px solid rgba(0, 245, 255, 0.4);
+            margin-bottom: 3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        th {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88);
+            color: #000 !important;
+            padding: 2rem;
+            text-align: left;
+            font-weight: 800;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        td {
+            padding: 1.8rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            font-weight: 500;
+        }
+
+        tr:hover td {
+            background: rgba(0, 245, 255, 0.15);
+            transform: scale(1.01);
+            box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            padding: 5rem 4rem;
+            border-radius: 35px;
+            border: 2px solid rgba(0, 245, 255, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-info h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info p {
+            font-size: 1.6rem;
+            margin: 1.5rem 0;
+            opacity: 0.95;
+        }
+
+        /* Headings */
+        h1, h2 {
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; color: #00f5ff; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 1.5rem; padding: 1rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .event-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            main { padding: 1rem; margin-top: 110px; }
+            .hero { padding: 4rem 2rem; }
+            form { padding: 2.5rem; margin: 2rem 1rem; }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(40, 40, 60, 0.8);
+            backdrop-filter: blur(20px);
+            color: #aaa;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(0, 245, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <nav>
+            <div class="logo">TechFest 2026</div>
+            <ul>
+                <li><a href="#" onclick="showPage('home'); return false;" class="nav-link active">🏠 Home</a></li>
+                <li><a href="#" onclick="showPage('events'); return false;" class="nav-link">📅 Events</a></li>
+                <li><a href="#" onclick="showPage('register'); return false;" class="nav-link">📝 Register</a></li>
+                <li><a href="#" onclick="showPage('contact'); return false;" class="nav-link">📞 Contact</a></li>
+                <li><a href="#" onclick="showPage('admin'); return false;" class="nav-link">👨‍💼 Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h2>🚀 Welcome to TechFest 2026 ✨</h2>
+                <p style="font-size: 1.6rem; margin-bottom: 3rem; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Experience the Ultimate Tech Extravaganza with Cutting-Edge Neon Technology! 🌌
+                </p>
+                <button class="btn" onclick="showPage('register')">⚡ Join the Revolution Now</button>
+            </section>
+
+            <h2>🔥 Featured Events</h2>
+            <div class="event-grid">
+                <div class="event-card" onclick="selectEvent('Coding Contest')">
+                    <h3>🎯 Coding Contest</h3>
+                    <p style="color: #e0e0e0; line-height: 1.7; font-size: 1.2rem;">Master complex algorithms in an epic battle of pure coding skills!</p>
+                </div>
+                <div class="event-card" onclick="selectEvent('Web Design')">
+                    <h3>🌐 Web Design</h3>
+                    <p style="color: #e0e0e0; line-height: 1.7; font-size: 1.2rem;">Craft stunning, futuristic websites with modern UI/UX mastery!</p>
+                </div>
+                <div class="event-card" onclick="selectEvent('Quiz')">
+                    <h3>🧠 Quiz</h3>
+                    <p style="color: #e0e0e0; line-height: 1.7; font-size: 1.2rem;">Test your technical knowledge across all domains of computer science!</p>
+                </div>
+                <div class="event-card" onclick="selectEvent('Robotics')">
+                    <h3>🤖 Robotics</h3>
+                    <p style="color: #e0e0e0; line-height: 1.7; font-size: 1.2rem;">Build and program robots to conquer challenging obstacle courses!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVENTS PAGE -->
+        <div id="events" class="page">
+            <h1>📅 Complete Event Galaxy</h1>
+            <div class="event-grid">
+                <div class="event-card">
+                    <h3>🎯 Coding Contest</h3>
+                    <p><strong style="color: #00f5ff;">📝 Description:</strong> Solve complex algorithmic problems under time pressure</p>
+                    <p><strong style="color: #ff00ff;">📅 Date:</strong> March 15, 2026</p>
+                    <p><strong style="color: #00ff88;">📍 Venue:</strong> Main Auditorium | <strong style="color: #ffaa00;">👥 Max: 100</strong></p>
+                </div>
+                <div class="event-card">
+                    <h3>🌐 Web Design</h3>
+                    <p><strong style="color: #00f5ff;">📝 Description:</strong> Create responsive websites with modern UI/UX principles</p>
+                    <p><strong style="color: #ff00ff;">📅 Date:</strong> March 16, 2026</p>
+                    <p><strong style="color: #00ff88;">📍 Venue:</strong> Computer Lab 1 | <strong style="color: #ffaa00;">👥 Max: 50</strong></p>
+                </div>
+                <div class="event-card">
+                    <h3>🧠 Quiz</h3>
+                    <p><strong style="color: #00f5ff;">📝 Description:</strong> Technical quiz covering CS fundamentals and trends</p>
+                    <p><strong style="color: #ff00ff;">📅 Date:</strong> March 17, 2026</p>
+                    <p><strong style="color: #00ff88;">📍 Venue:</strong> Seminar Hall | <strong style="color: #ffaa00;">👥 Max: 200</strong></p>
+                </div>
+                <div class="event-card">
+                    <h3>🤖 Robotics</h3>
+                    <p><strong style="color: #00f5ff;">📝 Description:</strong> Build & program robots for obstacle courses</p>
+                    <p><strong style="color: #ff00ff;">📅 Date:</strong> March 18, 2026</p>
+                    <p><strong style="color: #00ff88;">📍 Venue:</strong> Robotics Lab | <strong style="color: #ffaa00;">👥 Max: 30</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTRATION PAGE -->
+        <div id="register" class="page">
+            <form id="registrationForm">
+                <h2>🌌 Registration Portal</h2>
+                
+                <div class="form-group">
+                    <label for="name">👤 Warrior Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your epic name..." required>
+                    <div class="error" id="nameError">Name field cannot be empty</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">📧 Cyber Mail *</label>
+                    <input type="email" id="email" name="email" placeholder="yourname@domain.com" required>
+                    <div class="error" id="emailError">Enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">📱 Comm Link (10 digits) *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXX" required>
+                    <div class="error" id="phoneError">Phone must be exactly 10 digits</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="college">🏫 Base Station *</label>
+                    <input type="text" id="college" name="college" placeholder="Your college name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event">🎯 Mission Select *</label>
+                    <select id="event" name="event" required>
+                        <option value="">Choose your battlefield...</option>
+                        <option value="Coding Contest">🎯 Coding Contest</option>
+                        <option value="Web Design">🌐 Web Design</option>
+                        <option value="Quiz">🧠 Quiz</option>
+                        <option value="Robotics">🤖 Robotics</option>
+                    </select>
+                    <div class="error" id="eventError">Please select your mission</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamSize">👥 Squad Size</label>
+                    <select id="teamSize" name="teamSize">
+                        <option value="1">1 (Solo Warrior)</option>
+                        <option value="2">2 (Dynamic Duo)</option>
+                        <option value="3">3 (Power Trio)</option>
+                        <option value="4">4 (Elite Squad)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">🔒 Access Code *</label>
+                    <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required>
+                    <div class="error" id="passwordError">Access code must be 6+ characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">🔗 Verify Code *</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm access code" required>
+                    <div class="error" id="confirmPasswordError">Codes don't match</div>
+                </div>
+
+                <button type="submit" class="btn">🚀 Launch Mission</button>
+            </form>
+
+            <div id="successMessage" class="success" style="display: none;">
+                <h2 style="font-family: 'Orbitron', monospace; font-size: 3rem;">🎉 Mission Accepted!</h2>
+                <p id="successText" style="font-size: 1.5rem; margin: 2rem 0;"></p>
+                <div>
+                    <button class="btn" onclick="showPage('home')">🏠 Return to Base</button>
+                    <button class="btn btn-secondary" onclick="resetForm()">➕ Recruit Another</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <div class="contact-info">
+                <h1>📡 Command Center</h1>
+                <p style="font-size: 1.6rem;"><strong>📧 Email:</strong> techfest2026@college.edu</p>
+                <p style="font-size: 1.6rem;"><strong>📱 Phone:</strong> +91-XXXXXXXXXX</p>
+                <p style="font-size: 1.6rem;"><strong>📍 Venue:</strong> Main Campus, Bhubaneswar, Odisha</p>
+                <p style="font-size: 1.6rem;"><strong>📅 Event Dates:</strong> March 15-18, 2026</p>
+                <p style="font-size: 1.4rem; margin-top: 2rem; opacity: 0.9;">
+                    Follow us for live updates and announcements! 🚀✨
+                </p>
+            </div>
+        </div>
+
+        <!-- ADMIN DASHBOARD -->
+        <div id="admin" class="page">
+            <div class="admin-section">
+                <h1>👨‍💼 Control Panel</h1>
+                <p style="text-align: center; font-size: 2rem; margin-bottom: 3rem;">
+                    Total Recruits: <span id="totalCount" style="color: #00ff88; font-size: 3rem; font-weight: 900;">0</span>
+                </p>
+                
+                <table id="registrationsTable">
+                    <thead>
+                        <tr>
+                            <th>Warrior</th>
+                            <th>Cyber Mail</th>
+                            <th>Mission</th>
+                            <th>Comm Link</th>
+                            <th>Base</th>
+                            <th>Squad</th>
+                            <th>TimeStamp</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-secondary" onclick="clearAllRegistrations()" style="background: linear-gradient(45deg, #ff477e, #ff0040) !important; font-size: 1.1rem;">
+                        💥 Nuke Database (⚠️ Careful!)
+                    </button>
+                    <br><br>
+                    <button class="btn btn-secondary" onclick="exportData()" style="background: linear-gradient(45deg, #00ff88, #00f5ff) !important;">
+                        💾 Export Data (JSON)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 TechFest | Ultimate Single-File Cyberpunk Web App | Built with ❤️ for College Glory ✨</p>
+    </footer>
+
+    <script>
+        // Initialize floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 25 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                particle.style.opacity = Math.random() * 0.6 + 0.3;
+                container.appendChild(particle);
+            }
+        }
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            const navLinks = document.querySelectorAll('.nav-link');
+            const activeLink = Array.from(navLinks).find(link => {
+                const linkText = pageId === 'home' ? 'Home' : 
+                               pageId.charAt(0).toUpperCase() + pageId.slice(1);
+                return link.textContent.includes(linkText);
+            });
+            if (activeLink) activeLink.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Quick event selection
+        function selectEvent(eventName) {
+            document.getElementById('event').value = eventName;
+            showPage('register');
+        }
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            clearErrors();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            const eventSelect = document.getElementById('event').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (name === '') {
+                showError('nameError', '⚠️ Warrior name cannot be empty!');
+                isValid = false;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('emailError', '⚠️ Please enter a valid cyber mail!');
+                isValid = false;
+            }
+            if (phone.length !== 10) {
+                showError('phoneError', '⚠️ Comm link must be exactly 10 digits!');
+                isValid = false;
+            }
+            if (eventSelect === '') {
+                showError('eventError', '⚠️ Please select your mission!');
+                isValid = false;
+            }
+            if (password.length < 6) {
+                showError('passwordError', '⚠️ Access code must be 6+ characters!');
+                isValid = false;
+            }
+            if (password !== confirmPassword) {
+                showError('confirmPasswordError', '⚠️ Access codes do not match!');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function showError(errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+                errorElement.style.animation = 'shake 0.5s ease-in-out';
+            }
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error').forEach(error => {
+                error.style.display = 'none';
+            });
+        }
+
+        // Form submission & storage
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const form = document.getElementById('registrationForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        college: document.getElementById('college').value.trim(),
+                        event: document.getElementById('event').value,
+                        teamSize: document.getElementById('teamSize').value,
+                        timestamp: new Date().toLocaleString('en-IN', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            timeZoneName: 'short'
+                        })
+                    };
+
+                    let registrations = JSON.parse(localStorage.getItem('techfestRegistrations') || '[]');
+                    registrations.unshift(formData);
+                    localStorage.setItem('techfestRegistrations', JSON.stringify(registrations));
+
+                    document.getElementById('successText').textContent = 
+                        `Welcome aboard, ${formData.name}! 🎉 You've been locked in for "${formData.event}" mission! 🚀`;
+                    
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('registrationForm').style.display = 'none';
+                    loadRegistrations();
+                }
+            });
+
+            // Real-time validation
+            ['name', 'email', 'phone', 'password', 'confirmPassword'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('blur', validateForm);
+                    input.addEventListener('input', function() {
+                        if (this.value) clearErrors();
+                    });
+                }
+            });
+
+            // Auto-save form progress
+            document.querySelectorAll('input, select').forEach(input => {
+                const saved = localStorage.getItem(`techfestForm_${input.id}`);
+                if (saved) input.value = saved;
+                
+                input.addEventListener('change', function() {
+                    localStorage.setItem(`techfestForm_${this.id}`, this.value);
+                });
+            });
+
+            loadRegistrations();
+        });
+
+        function resetForm() {
+            document.getElementById('registrationForm').reset();
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            clearErrors();
+            
+            // Clear auto-saved form data
+            document.querySelectorAll('input, select').forEach(input => {
+                localStorage.removeItem(`techfestForm_${input.id}`);
+            });
+        }
+
+        function loadRegistrations() {
+            const registrations = JSON.parse(localStorage.getItem('techfestRegistrations') || '[]');
+            const tbody = document.querySelector('#registrationsTable tbody');
+            tbody.innerHTML = '';
+
+            registrations.forEach(reg => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td style="font-weight: 700; color: #00f5ff;">${reg.name}</td>
+                    <td style="color: #e0e0e0; font-size: 0.95rem;">${reg.email}</td>
+                    <td style="color: #00ff88; font-weight: 700; font-size: 1.1rem;">${reg.event}</td>
+                    <td style="color: #ffaa00;">${reg.phone}</td>
+                    <td style="color: #e0e0e0;">${reg.college}</td>
+                    <td style="text-align: center; color: #ff00ff; font-weight: 700; font-size: 1.2rem;">${reg.teamSize}</td>
+                    <td style="color: #888; font-size: 0.9rem;">${reg.timestamp}</td>
+                `;
+            });
+
+            document.getElementById('totalCount').textContent = registrations.length;
+        }
+
+        function clearAllRegistrations() {
+            if (confirm('⚠️ WARNING: This will PERMANENTLY delete ALL registrations! Are you absolutely sure?')) {
+                localStorage.removeItem('techfestRegistrations');
+                loadRegistrations();
+                alert('✅ Database successfully nuked! 🧨');
+            }
+        }
+
+        function exportData() {
+            const registrations = JSON.parse(localStorage.getItem('techfestRegistrations') || '[]');
+            const dataStr = JSON.stringify(registrations, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `techfest-registrations-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Add shake animation for errors
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
